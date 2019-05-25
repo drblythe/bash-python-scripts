@@ -1,0 +1,4 @@
+#!/bin/bash
+# Script to disable buggy laptop touchscreen
+
+xinput disable $(xinput | grep MultiTouch | cut -d'=' -f2 | cut -d'[' -f1)

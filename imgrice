@@ -1,0 +1,60 @@
+#!/bin/bash
+#
+# This script uses imagemagick to filter certain darks/lights out of images by generating
+# a transparent gray image to overlay and lighten input image. I use it on desktop wallpapers.
+#
+# Use: $imgrice image1.png image2.jpg ...etc
+#
+
+# Colors to filter
+CHARCOAL="#3c3c3c" 	# Dark
+MEDGRAY="#a7a7a7" 	# Light
+
+# Get primary screen resolution:
+SCREENRES=$(xrandr | grep primary | cut -d' ' -f4 | cut -d'+' -f1)
+
+# Optional input for output filename
+echo -n "Prefix for output filenames: "
+read PREFIX
+if [ "$PREFIX" = "" ]; then
+	PREFIX="out"
+fi
+
+
+# Generate black/white overlays to be used for filtering
+convert -size $SCREENRES xc:"$CHARCOAL" -alpha set -background none -channel A -evaluate multiply 0.7 +channel PNG32:temp_dark_filter.png
+convert -size $SCREENRES xc:"$MEDGRAY" -alpha set -background none -channel A -evaluate multiply 0.7 +channel PNG32:temp_light_filter.png
+
+
+# Loop over all files:
+COUNT=0
+for INPUTFILE in "$@"; do
+	let "COUNT++"
+	OUTPUTFILE="$PREFIX-$(echo $INPUTFILE | cut -d '.' -f1)"
+	GEOMETRY=$(identify $INPUTFILE | cut -d' ' -f3)
+
+	# If geometry of image != resolution of screen, convert image to that size
+	if [ $GEOMETRY != $SCREENRES  ]; then
+		convert "$INPUTFILE" -resize $SCREENRES $INPUTFILE
+	fi
+
+	# Filter out the darks/lights from image (the temp*.png are just files that will be deleted)
+    convert "$INPUTFILE" temp_dark_filter.png -compose Lighten -composite temp_conversion_output.png
+    convert temp_conversion_output.png temp_light_filter.png -compose Darken -composite temp_output_pre_grain.png
+	convert temp_output_pre_grain.png -strip -sampling-factor 4:2:0 -quality 85 -interlace Plane \( +clone +level-colors GREY50 -attenuate 6 +noise Poisson -colorspace Gray \) -compose Overlay -composite "$OUTPUTFILE.jpg"
+	echo "$COUNT/$# completed"
+    done
+
+# Remove temp files
+rm temp_dark_filter.png
+rm temp_light_filter.png
+rm temp_conversion_output.png
+rm temp_output_pre_grain.png
+
+
+
+
+
+
+
+
