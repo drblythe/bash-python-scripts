@@ -1,13 +1,4 @@
 #!/bin/bash
-# An i3lock script that takes a screenshot, blurs it, and adds lock image of your choice
-#
-# Usage: Pass an image as argument (i.e. $ jakelocker /path/to/image.png)
-# The given image will be overlayed over blurred background (may need to fiddle
-# with the size of your image)
-# If no image specified, lock screen will be a blurred screenshot of current window
-#
-# Dependencies: imagemagick, scrot, i3lock (duh)
-#
 
 LOCKIMAGE=$1
 
@@ -17,4 +8,4 @@ if [[ -f $LOCKIMAGE ]]; then
    convert /tmp/temp_lockscreen.png $LOCKIMAGE -gravity center -composite /tmp/temp_lockscreen.png
 fi
 
-i3lock -e -f -u -c 000000 -i /tmp/temp_lockscreen.png
+i3lock -e -f -c 000000 -i /tmp/temp_lockscreen.png

@@ -1,6 +1,18 @@
 #!/bin/bash
-CONNECTED_DISPLAY=$(xrandr | grep " connected" | cut -d' ' -f1 | tail -1)
-if [ $CONNECTED_DISPLAY ]; then
-	xrandr --output $CONNECTED_DISPLAY --auto --above LVDS1
+DISPLAYPORT=$(xrandr | grep " connected" | cut -d' ' -f1 | grep DP)
+VGA=$(xrandr | grep " connected" | cut -d' ' -f1 | grep VGA)
+if [ $DISPLAYPORT ]; then
 	xrandr --output LVDS1 --off
+	echo "$DISPLAYPORT connected"
+	xrandr --output $DISPLAYPORT --primary --fb 1920x1080 
+	#bspc monitor DP2 -d I II III IV V VI VII VIII IX X
+	bspc monitor DP2 -d 1 2 3 4 5
+	#if [ $VGA ]; then
+	#	xrandr --output $VGA --auto --below $DISPLAYPORT --rotate inverted
+	#	echo "$VGA connected"
+	#fi
+else
+	xrandr --output LVDS1 --primary --fb 1366x768
+	bspc monitor LVDS1 -d 1 2 3 4 5
+	#bspc monitor LVDS1 -d ち こ そ し い
 fi
