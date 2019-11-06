@@ -8,4 +8,5 @@ xrdb ~/.Xresources.black &
 sleep 2.5
 #~/.scripts/tewi-fortune.sh &
 #~/.scripts/cow-fortune.sh &
-#~/.scripts/marimo-fortune.sh 
+#~/.scripts/marimo-fortune.sh &
+#~/.scripts/owo-fortune.sh && sleep 20
