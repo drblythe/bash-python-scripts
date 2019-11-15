@@ -1,11 +1,24 @@
 #!/bin/bash
+
+# Display
 redshift -x &
 redshift -PO 5600 &
+feh --bg-fill ~/Pictures/nasa/nasa1.jpg &
+
+# Tray
+pasystray &
+#nm-applet &
+
+# Terminal
+xrdb ~/.Xresources.black &
 #xrdb ~/.Xresources.mariana &
 #xrdb ~/.Xresources.gruv &
-xrdb ~/.Xresources.black &
-#~/.scripts/reverse_trackpoint.sh &
-#~/.scripts/trackpoint_accel.sh &
+
+# Input
+~/.scripts/reverse_trackpoint.sh &
+~/.scripts/trackpoint_accel.sh &
+
+# Other
 #sleep 2.5
 #~/.scripts/tewi-fortune.sh &
 #~/.scripts/cow-fortune.sh &
