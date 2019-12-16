@@ -1,4 +1,4 @@
 #!/bin/bash
-polybar dark &
+polybar status &
 wait
-xdo hide -N "Polybar"
+#xdo hide -N "Polybar"

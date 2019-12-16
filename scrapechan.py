@@ -43,9 +43,8 @@ import sys
 #
 g_blacklist = ["bro ","seething ","apple ","install gentoo","absolute state","you may not like it but", "why havent","why doesnt", "why arent you","he doesnt","developer ", "based and","good afternoon","discord ","zoomers ","meme ","hey guys","smartphone"," phone","google","coding","memes ","browser","firefox","waterfox", "chrome ","chromium","sup "," moon","rip ","gaym","android ","stickers ","game","web ","normie","itoddler","btfo "," shill"," sjw ", " interject ","one copy of","gaming","daily reminder"," reminder ","virtual reality"," vr "," brave", "he doesnt"," intel "," amd ","nvidia"," gpu"," 5g "," pajeet ", " burger ", " app", "freetard","windows","incel ","madmen","comfy","absolute state"," mac "," ios","reddit","what does g think","intellectual ","oh no no"," cia ","youtube"," university ","student","threadripper"," rig ", "battlestation","prove me wrong"," youll ever need","gnome","instagram","facebook","twitter","tfw ","nothin personnel"]
 
-w_blacklist = ["phone", "mobile", "sailor moon", " car ", " cars ", "image modification", "one piece", "jojo", "dragon ball", "spice and wolf", "holo", "attack on titan", "read this before", "renders in shape", "request", "pokemon"]
+a_blacklist = ["boku no hero","my hero","shounen","shonen"]
 
-wg_blacklist = ["sticky", "cyberpunk", "political", "nazi","nude","fuckscape","sexy", " hot","game of thrones","quotes","wave ","birthday","mobile", "phone","punk"," girls ", " women ", " dudes ", " men ", " man ", "homescreen", "lockscreen", " apple ", " mac", "image modification", "40k"]
 
 
 # Default board is /g/ if no argument given
@@ -90,24 +89,24 @@ if board == 'g':
              if phrase in title.lower():
                  bad_thread_count += 1
                  break
-
-elif board == 'w':
+elif board == 'a':
     for title in thread_list:
+     if  len(title.split()) < 5:
+         bad_thread_count += 1
+         continue
+     elif (title[0:4] == greentext): # If title starts with greentext
+         bad_thread_count += 1
+         continue
+     else:
          for char in special_chars:
              title = title.replace(char,"")
-         for phrase in w_blacklist:
-            if phrase in title.lower():
-                bad_thread_count += 1
-                break
+         for phrase in a_blacklist:
+             if phrase in title.lower():
+                 bad_thread_count += 1
+                 break
 
-elif board == 'wg':
-    for title in thread_list:
-         for char in special_chars:
-             title = title.replace(char,"")
-         for phrase in wg_blacklist:
-            if phrase in title.lower():
-                bad_thread_count += 1
-                break
+
+
 
 
 percentage = round(( (total_threads-bad_thread_count) / total_threads)*100)
