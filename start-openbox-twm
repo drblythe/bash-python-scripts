@@ -6,7 +6,7 @@ setxkbmap -option caps:swapescape
 dunst &
 pulseaudio &
 pasystray &
-sudo nm-applet &
+nm-applet &
 xfce4-power-manager &
 sleep .5
 ~/.scripts/reverse_trackpoint.sh &
