@@ -1,6 +1,6 @@
 #!/bin/bash
 picom --config ~/.config/compton.conf & #--shadow-exclude-reg 1600x18+0+0 &
-feh --bg-tile ~/Pictures/pape/twm_4x4.png &
+feh --bg-tile ~/Pictures/Wallpapers/patterns/twm_4x4.png &
 polybar twm-taskbar &
 setxkbmap -option caps:swapescape 
 dunst &

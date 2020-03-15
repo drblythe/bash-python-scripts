@@ -1,6 +1,7 @@
 #!/bin/bash
-xrdb ~/.Xresources_solarized_builtin &
-windscribe connect hops &
+ksuperkey &
+xrdb ~/.Xresources_elemental &
+#windscribe connect hops &
 sleep 5
 ~/.scripts/tewi-fortune.sh &
 
