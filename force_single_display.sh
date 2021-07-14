@@ -4,7 +4,7 @@ num_devices=${#device_list[@]}
 if [ $num_devices -gt 1 ]
 then
 	# Multiple displays -- turn off laptop
-	xrandr --output LVDS1 --off
+	xrandr --output eDP-1 --off
 fi
 
 #for var in ${device_list[@]}
