@@ -1,2 +1,2 @@
 #!/bin/bash
-mplayer -quiet https://stream.houstonpublicmedia.org/news-mp3
+mpv -quiet https://stream.houstonpublicmedia.org/news-mp3
