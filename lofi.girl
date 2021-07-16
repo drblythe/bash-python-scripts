@@ -1,0 +1,20 @@
+#!/bin/bash
+
+playlist=(\
+https://www.youtube.com/watch?v=_ITiwPMUzho \
+https://www.youtube.com/watch?v=QJqGa_CVnLo \
+https://www.youtube.com/watch?v=GfIvfO9o6lo \
+https://www.youtube.com/watch?v=M5QY2_8704o \
+https://www.youtube.com/watch?v=fImMNxHj2aU \
+https://www.youtube.com/watch?v=O3UenuM-SYY \
+https://www.youtube.com/watch?v=_4kLioMoMrk \
+https://www.youtube.com/watch?v=5qap5aO4i9A \
+https://www.youtube.com/watch?v=ZVb_yKMivqo \
+https://www.youtube.com/watch?v=sG75OnvGopI \
+https://www.youtube.com/watch?v=GNWLILeztaI \
+https://www.youtube.com/watch?v=C4MpzSMkinw \
+)
+
+n="${#playlist[@]}"
+
+mpv --really-quiet --vid=no ${playlist[$RANDOM%$n]}
